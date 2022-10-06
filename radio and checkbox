@@ -1,0 +1,182 @@
+radio and check box use
+
+                              main.java file
+
+package com.example.checkandradiobutton;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+ TextView  textview1;
+ EditText edittext1,edittext2;
+ RadioButton radiobutton1,radiobutton2;
+ RadioGroup radiogroup;
+ CheckBox checkbox;
+ Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textview1 = findViewById(R.id.Gender);
+        edittext1 = findViewById(R.id.name);
+        edittext2 = findViewById(R.id.mobilenumber);
+        radiobutton1 = findViewById(R.id.male);
+        radiobutton2 = findViewById(R.id.female);
+        radiogroup = findViewById(R.id.radiogroup);
+        checkbox = findViewById(R.id.checkbox);
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (error()){
+                    Intent intent = new Intent( MainActivity.this, MainActivity2.class);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
+    }
+    private boolean error(){
+
+        if (edittext2.getText().toString().length() == 0){
+
+            Toast.makeText(MainActivity.this, "please fill mobile number", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (edittext2.getText().toString().length() !=10){
+            Toast.makeText(MainActivity.this, "please enter valid mobile number", Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        else if (textview1.getText().toString().length() ==0){
+            Toast.makeText(MainActivity.this, "Enter your name", Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        else if (!radiobutton1.isChecked() && !radiobutton2.isChecked()){
+            Toast.makeText(MainActivity.this, "Please select your gender", Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        else if (!checkbox.isChecked()){
+            Toast.makeText(MainActivity.this, "please select term and condition", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+}
+
+
+                                        xml file
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D3E0B35"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
+    <EditText
+        android:id="@+id/mobilenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Mobile Number"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198" />
+
+    <TextView
+        android:id="@+id/Gender"
+        android:layout_width="166dp"
+        android:layout_height="49dp"
+        android:paddingTop="10dp"
+        android:text="     Gender"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="351dp"
+        android:layout_height="97dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:text="MALE" />
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:text="FEMALE" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="145dp"
+        android:layout_height="56dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="232dp"
+        android:layout_height="56dp"
+        android:text="Term and Condition  Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.784" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
